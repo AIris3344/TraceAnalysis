@@ -1,16 +1,17 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
+from pyspark.sql.functions import *
 import matplotlib.pyplot as plt
+# import seaborn as sb
 
 data_path = "hdfs://10.1.4.11:9000/user/hduser/"
 
 spark = SparkSession.builder\
-    .master("local[4]")\
+    .master("local[*]")\
     .appName("TraceAnalysis")\
     .getOrCreate()
 
 sc = spark.sparkContext
-
 #
 schema_machine_meta = StructType([\
     StructField("machine_id", StringType(), True),\
@@ -26,25 +27,27 @@ print("machine_meta:")
 df_machine_meta.show()
 
 
-cpu_dict = {}
 
-for row in df_machine_meta.select("machine_id", "time_stamp", "cpu_num").collect():
-    if cpu_dict.get(row.machine_id) == None:
-        cpu_dict[row.machine_id] = [[row.time_stamp], [row.cpu_num]]
-    else:
-        l1 = cpu_dict[row.machine_id][0]
-        l2 = cpu_dict[row.machine_id][1]
-        l1.append(row.time_stamp)
-        l2.append(row.cpu_num)
-        cpu_dict[row.machine_id] = [l1, l2]
-
-for key, value in cpu_dict.items():
-    plt.plot(value[0], value[1], label=key)
-
-plt.savefig("machine_meta.png")
-plt.show()
-
-print(cpu_dict)
+#
+# cpu_dict = {}
+#
+# for row in df_machine_meta.select("machine_id", "time_stamp", "cpu_num").collect():
+#     if cpu_dict.get(row.machine_id) == None:
+#         cpu_dict[row.machine_id] = [[row.time_stamp], [row.cpu_num]]
+#     else:
+#         l1 = cpu_dict[row.machine_id][0]
+#         l2 = cpu_dict[row.machine_id][1]
+#         l1.append(row.time_stamp)
+#         l2.append(row.cpu_num)
+#         cpu_dict[row.machine_id] = [l1, l2]
+#
+# for key, value in cpu_dict.items():
+#     plt.plot(value[0], value[1], label=key)
+#
+# plt.savefig("machine_meta.png")
+# plt.show()
+#
+# print(cpu_dict)
 
 # lists = df_machine_meta.select("machine_id").collect()
 # print(lists)
@@ -65,34 +68,59 @@ print(cpu_dict)
 schema_machine_usage = StructType([\
     StructField("machine_id", StringType(), True),\
     StructField("time_stamp", DoubleType(), True),\
-    StructField("cpu_util_percent", LongType(), True),\
-    StructField("mem_util_percent", LongType(), True),\
+    StructField("cpu_util_percent", IntegerType(), True),\
+    StructField("mem_util_percent", IntegerType(), True),\
     StructField("mem_gps", DoubleType(), True),\
     StructField("mkpi", LongType(), True),\
     StructField("net_in", DoubleType(), True),\
     StructField("net_out", DoubleType(), True),\
     StructField("disk_io_percent", DoubleType(), True)])
-df_machine_usage = spark.read.format("csv").option("header", "false").schema(schema_machine_usage).load(data_path + "machine_usage.csv")
+spark.read.format("csv").option("header", "false").schema(schema_machine_usage).load(data_path + "machine_usage.csv").drop("mem_gps", "mkpi", "net_in", "net_out", "disk_io_percent").createOrReplaceTempView("machine_usage")
 print("machine_usage:")
+df_machine_usage = spark.sql("SELECT machine_id, time_stamp, cpu_util_percent, mem_util_percent, FLOOR(time_stamp / 86400) AS day, FLOOR(time_stamp / 900) AS minute FROM machine_usage")
 df_machine_usage.show()
+df_machine_usage.write.partitionBy('day', 'minute').parquet(data_path + "machine_usage.parquet")
 
-cpu_dict = {}
 
-for row in df_machine_usage.select("machine_id", "time_stamp", "cpu_util_percent").collect():
-    if cpu_dict.get(row.machine_id) == None:
-        cpu_dict[row.machine_id] = [[row.time_stamp], [row.cpu_util_percent]]
-    else:
-        l1 = cpu_dict[row.machine_id][0]
-        l2 = cpu_dict[row.machine_id][1]
-        l1.append(row.time_stamp)
-        l2.append(row.cpu_util_percent)
-        cpu_dict[row.machine_id] = [l1, l2]
+# df_machine_usage = df_machine_usage.repartition(8, "day")
+# df_machine_usage.show()
+# df_machine_usage.foreachPartition
 
-for key, value in cpu_dict.items():
-    plt.plot(value[0], value[1], label=key)
+# cm_struct = StructType([StructField("machine_id", StringType(), True), StructField("cpu", DoubleType(), True), StructField("mem", DoubleType(), True), StructField("time_stamp", IntegerType(), True)])
+# cm_frame = spark.createDataFrame(sc.emptyRDD(), cm_struct)
 
-plt.savefig("machine_usage.png")
-plt.show()
+# spark.createDataFrame()
+# cpu_dict = {}
+# mem_dict = {}
+# foreach_nums = range(1)
+# for i in foreach_nums:
+#     frame = spark.sql("SELECT machine_id, AVG(cpu_util_percent) AS cpu, AVG(mem_util_percent) AS mem, " + str(i) + " AS time_stamp FROM machine_usage WHERE time_stamp >= " + str(i * 15 * 60) + " AND time_stamp < " + str((i + 1) * 15 * 60) + " GROUP BY machine_id ORDER BY time_stamp")
+#     frame.show()
+#     cm_frame = cm_frame.unionAll(frame)
+# cm_frame.show()
+
+
+
+# df_cpu = df_machine_usage.select("machine_id", "cpu_util_percent").toPandas()
+
+
+# cpu_dict = {}
+#
+# for row in df_machine_usage.select("machine_id", "time_stamp", "cpu_util_percent").collect():
+#     if cpu_dict.get(row.machine_id) == None:
+#         cpu_dict[row.machine_id] = [[row.time_stamp], [row.cpu_util_percent]]
+#     else:
+#         l1 = cpu_dict[row.machine_id][0]
+#         l2 = cpu_dict[row.machine_id][1]
+#         l1.append(row.time_stamp)
+#         l2.append(row.cpu_util_percent)
+#         cpu_dict[row.machine_id] = [l1, l2]
+#
+# for key, value in cpu_dict.items():
+#     plt.plot(value[0], value[1], label=key)
+#
+# plt.savefig("machine_usage.png")
+# plt.show()
 
 #
 schema_container_meta = StructType([\
