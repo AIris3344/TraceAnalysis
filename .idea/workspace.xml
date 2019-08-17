@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main.py" line="94" />
+    <bookmark url="file://$PROJECT_DIR$/src/main.py" line="97" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5c5dadc9-36c9-438a-8be2-3b442fa3a6c3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.ignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/convert_parquet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/execute.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CAO18-SP.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CAO18-SP.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CAO18-Spec.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proj-spec-template.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLegalForm-Signed.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLegalForm.doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectLegalForm.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SOSE-Vision-Final5.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web hosting.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/machine_meta.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper1.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper2.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,14 +33,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="90" column="283" selection-start-line="90" selection-start-column="283" selection-end-line="90" selection-end-column="283" />
+            <state relative-caret-position="163">
+              <caret line="77" column="117" selection-start-line="77" selection-start-column="117" selection-end-line="77" selection-end-column="117" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.ignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="1" selection-start-column="1" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -82,6 +82,7 @@
       <list>
         <option value="$PROJECT_DIR$/src/main.ipynb" />
         <option value="$PROJECT_DIR$/src/main.py" />
+        <option value="$PROJECT_DIR$/.ignore" />
       </list>
     </option>
   </component>
@@ -107,7 +108,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -117,68 +117,14 @@
             </path>
             <path>
               <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (TraceAnalysis) &gt;" type="70bed36:NamedLibraryElementNode" />
-            </path>
-            <path>
-              <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (TraceAnalysis) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="python3.7" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (TraceAnalysis) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="python3.7" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (TraceAnalysis) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="python3.7" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="pyspark" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (TraceAnalysis) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="python3.7" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="pyspark" type="462c0819:PsiDirectoryNode" />
-              <item name="sql" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (TraceAnalysis) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (TraceAnalysis) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="pyspark" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TraceAnalysis" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (TraceAnalysis) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-              <item name="pyspark" type="462c0819:PsiDirectoryNode" />
-              <item name="sql" type="462c0819:PsiDirectoryNode" />
+              <item name="TraceAnalysis" type="462c0819:PsiDirectoryNode" />
+              <item name=".vscode" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -194,6 +140,11 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -306,11 +257,12 @@
       <workItem from="1564205258250" duration="4926000" />
       <workItem from="1564825169385" duration="17161000" />
       <workItem from="1565516880687" duration="9140000" />
+      <workItem from="1566040389364" duration="1080000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71161000" />
+    <option name="totallyTimeSpent" value="72241000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -323,8 +275,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.41778523" visible="true" weight="0.26068377" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.41778523" visible="true" weight="0.26373628" />
       <window_info id="Favorites" order="1" side_tool="true" />
       <window_info id="Structure" order="2" sideWeight="0.5822148" weight="0.25235197" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -338,7 +291,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50061125" side_tool="true" weight="0.32879582" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49938875" visible="true" weight="0.29571578" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49938875" visible="true" weight="0.26645768" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.3291536" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="13" weight="0.32852387" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -377,7 +330,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MScProject$main.coverage" NAME="main Coverage Results" MODIFIED="1563845008520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
-    <SUITE FILE_PATH="coverage/TraceAnalysis$main.coverage" NAME="main Coverage Results" MODIFIED="1565554112895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/TraceAnalysis$main.coverage" NAME="main Coverage Results" MODIFIED="1566040699020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/MScProject$readwriter.coverage" NAME="readwriter Coverage Results" MODIFIED="1563439702060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="/usr/local/lib/python3.6/dist-packages/pyspark/sql" />
     <SUITE FILE_PATH="coverage/TraceAnalysis$kmeans_example.coverage" NAME="kmeans_example Coverage Results" MODIFIED="1564930564148" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/02_App/spark-2.4.3-bin-hadoop2.7/examples/src/main/python/ml" />
   </component>
@@ -404,9 +357,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/hs_err_pid6096.log" />
-    <entry file="file://$PROJECT_DIR$/Web hosting.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Web hosting.png" />
     <entry file="file:///usr/local/lib/python3.6/dist-packages/pyspark/context.py" />
     <entry file="file:///usr/local/lib/python3.6/dist-packages/pyspark/conf.py" />
     <entry file="file:///usr/local/lib/python3.6/dist-packages/pyspark/sql/streaming.py" />
@@ -479,9 +430,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/machine_meta.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/machine_meta.png" />
     <entry file="file://$USER_HOME$/.conda/envs/TraceAnalysis/lib/python3.7/site-packages/matplotlib/pyplot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
@@ -519,11 +468,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="90" column="283" selection-start-line="90" selection-start-column="283" selection-end-line="90" selection-end-column="283" />
+        <state relative-caret-position="163">
+          <caret line="77" column="117" selection-start-line="77" selection-start-column="117" selection-end-line="77" selection-end-column="117" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.ignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
         </state>
       </provider>
     </entry>

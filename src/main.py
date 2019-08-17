@@ -75,12 +75,21 @@ schema_machine_usage = StructType([\
     StructField("net_in", DoubleType(), True),\
     StructField("net_out", DoubleType(), True),\
     StructField("disk_io_percent", DoubleType(), True)])
-spark.read.format("csv").option("header", "false").schema(schema_machine_usage).load(data_path + "machine_usage.csv").drop("mem_gps", "mkpi", "net_in", "net_out", "disk_io_percent").createOrReplaceTempView("machine_usage")
+spark.read.format("csv").option("header", "false").schema(schema_machine_usage).load(data_path + "machine_usage.csv").createOrReplaceTempView("machine_usage")
 print("machine_usage:")
-df_machine_usage = spark.sql("SELECT machine_id, time_stamp, cpu_util_percent, mem_util_percent, FLOOR(time_stamp / 86400) AS day, FLOOR(time_stamp / 900) AS minute FROM machine_usage")
+spark.sql("select * from machine_usage").show()
+df_machine_usage = spark.sql("SELECT CAST(SUBSTRING(machine_id, 3, 4) AS int) AS machine_id, time_stamp, cpu_util_percent, mem_util_percent, FLOOR(time_stamp / 900) AS minute FROM machine_usage")
 df_machine_usage.show()
-df_machine_usage.write.partitionBy('day', 'minute').parquet(data_path + "machine_usage.parquet")
+# df_machine_usage.write.partitionBy('day', 'minute').parquet(data_path + "machine_usage.parquet")
+# df_machine_usage.write.partitionBy('day', 'machine_id').parquet(data_path + "machine_usage2.parquet")
 
+""" Save as parquet file
+df_machine_usage.select("machine_id", "minute", "cpu_util_percent", "mem_util_percent")\
+    .groupBy("machine_id", "minute")\
+    .agg({"cpu_util_percent": "avg", "mem_util_percent": "avg"})\
+    .orderBy("machine_id", "minute")\
+    .write.csv(data_path + "machine_usage_output.csv")
+"""
 
 # df_machine_usage = df_machine_usage.repartition(8, "day")
 # df_machine_usage.show()
