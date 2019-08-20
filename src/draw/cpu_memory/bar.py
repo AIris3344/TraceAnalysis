@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
-sns.set()
+sns.set_style("whitegrid")
 
 data_path = "hdfs://10.1.4.11:9000/user/hduser/"
 
@@ -17,7 +17,6 @@ schema = StructType([\
     StructField("mem_util_percent", DoubleType(), True),\
     StructField("cpu_util_percent", DoubleType(), True)])
 
-# .load(data_path + "machine_usage_output.csv/part-00000-25f3311a-92ba-455d-9c43-5edfb1907f64-c000.csv")
 machine_usage = spark.read\
     .format("csv")\
     .option("header", "false")\
