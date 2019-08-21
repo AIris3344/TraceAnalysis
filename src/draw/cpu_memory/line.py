@@ -29,7 +29,7 @@ schema = StructType([\
     StructField("cpu_util_percent", DoubleType(), True),\
     StructField("mem_util_percent", DoubleType(), True)])
 
-# Plot CPU average usage
+# Plot CPU average usage per 15 minutes
 plt.figure(figsize=[12, 6])
 plt.xlabel('Time(hours)')
 plt.ylabel('CPU usage')
@@ -48,7 +48,7 @@ plt.legend(loc="upper right")
 plt.grid()
 plt.show()
 
-# Plot Memory average usage
+# Plot Memory average usage per 15 minutes
 plt.figure(figsize=[12, 8])
 plt.xlabel('Time(hours)')
 plt.ylabel('Memory usage')

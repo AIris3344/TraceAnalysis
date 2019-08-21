@@ -21,7 +21,7 @@ machine_usage = spark.read\
     .format("csv")\
     .option("header", "false")\
     .schema(schema)\
-    .load(data_path + "machine_usage_output.csv/part-00000-25f3311a-92ba-455d-9c43-5edfb1907f64-c000.csv")
+    .load(data_path + "machine_usage_output.csv")
 
 machine_usage = machine_usage\
     .groupBy("minute")\
@@ -33,7 +33,7 @@ machine_usage = machine_usage\
 machine_usage.show()
 
 # Draw memory average usage
-ax = sns.distplot(machine_usage.select("mem_util_percent").collect(), bins=5)
+ax = sns.distplot(machine_usage.select("mem_util_percent").collect(), bins=7)
 ax.set_xlabel("Memmory usage")
 ax.set_ylabel("Fraction time")
 x_vals = ax.get_xticks()

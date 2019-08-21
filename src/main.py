@@ -1,8 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
 from pyspark.sql.functions import *
-import matplotlib.pyplot as plt
-# import seaborn as sb
 
 data_path = "hdfs://10.1.4.11:9000/user/hduser/"
 
@@ -27,44 +25,6 @@ print("machine_meta:")
 df_machine_meta.show()
 
 
-
-#
-# cpu_dict = {}
-#
-# for row in df_machine_meta.select("machine_id", "time_stamp", "cpu_num").collect():
-#     if cpu_dict.get(row.machine_id) == None:
-#         cpu_dict[row.machine_id] = [[row.time_stamp], [row.cpu_num]]
-#     else:
-#         l1 = cpu_dict[row.machine_id][0]
-#         l2 = cpu_dict[row.machine_id][1]
-#         l1.append(row.time_stamp)
-#         l2.append(row.cpu_num)
-#         cpu_dict[row.machine_id] = [l1, l2]
-#
-# for key, value in cpu_dict.items():
-#     plt.plot(value[0], value[1], label=key)
-#
-# plt.savefig("machine_meta.png")
-# plt.show()
-#
-# print(cpu_dict)
-
-# lists = df_machine_meta.select("machine_id").collect()
-# print(lists)
-# machine_ids = df_machine_meta.groupBy("machine_id").count().select("machine_id").orderBy("machine_id").cache()
-
-# machine_ids.select("machine_id").foreach(lambda row: print(row))
-
-# df_machine_meta.createOrReplaceTempView("machine_meta")
-# sqlDF_machine_meta = spark.sql("SELECT * FROM machine_meta")
-# sqlDF_machine_meta.show()
-
-# sqlDF_machine_meta = spark.sql("SELECT machine_id FROM machine_meta group by machine_id order by machine_id")
-# sqlDF_machine_meta.show()
-# print(sqlDF_machine_meta.count())
-
-#
-
 schema_machine_usage = StructType([\
     StructField("machine_id", StringType(), True),\
     StructField("time_stamp", DoubleType(), True),\
@@ -80,56 +40,17 @@ print("machine_usage:")
 spark.sql("select * from machine_usage").show()
 df_machine_usage = spark.sql("SELECT CAST(SUBSTRING(machine_id, 3, 4) AS int) AS machine_id, time_stamp, cpu_util_percent, mem_util_percent, FLOOR(time_stamp / 900) AS minute FROM machine_usage")
 df_machine_usage.show()
-# df_machine_usage.write.partitionBy('day', 'minute').parquet(data_path + "machine_usage.parquet")
-# df_machine_usage.write.partitionBy('day', 'machine_id').parquet(data_path + "machine_usage2.parquet")
 
-""" Save as parquet file
+"""
+df_machine_usage.write.partitionBy('day', 'minute').parquet(data_path + "machine_usage.parquet")
+
 df_machine_usage.select("machine_id", "minute", "cpu_util_percent", "mem_util_percent")\
     .groupBy("machine_id", "minute")\
     .agg({"cpu_util_percent": "avg", "mem_util_percent": "avg"})\
     .orderBy("machine_id", "minute")\
     .write.csv(data_path + "machine_usage_output.csv")
+    
 """
-
-# df_machine_usage = df_machine_usage.repartition(8, "day")
-# df_machine_usage.show()
-# df_machine_usage.foreachPartition
-
-# cm_struct = StructType([StructField("machine_id", StringType(), True), StructField("cpu", DoubleType(), True), StructField("mem", DoubleType(), True), StructField("time_stamp", IntegerType(), True)])
-# cm_frame = spark.createDataFrame(sc.emptyRDD(), cm_struct)
-
-# spark.createDataFrame()
-# cpu_dict = {}
-# mem_dict = {}
-# foreach_nums = range(1)
-# for i in foreach_nums:
-#     frame = spark.sql("SELECT machine_id, AVG(cpu_util_percent) AS cpu, AVG(mem_util_percent) AS mem, " + str(i) + " AS time_stamp FROM machine_usage WHERE time_stamp >= " + str(i * 15 * 60) + " AND time_stamp < " + str((i + 1) * 15 * 60) + " GROUP BY machine_id ORDER BY time_stamp")
-#     frame.show()
-#     cm_frame = cm_frame.unionAll(frame)
-# cm_frame.show()
-
-
-
-# df_cpu = df_machine_usage.select("machine_id", "cpu_util_percent").toPandas()
-
-
-# cpu_dict = {}
-#
-# for row in df_machine_usage.select("machine_id", "time_stamp", "cpu_util_percent").collect():
-#     if cpu_dict.get(row.machine_id) == None:
-#         cpu_dict[row.machine_id] = [[row.time_stamp], [row.cpu_util_percent]]
-#     else:
-#         l1 = cpu_dict[row.machine_id][0]
-#         l2 = cpu_dict[row.machine_id][1]
-#         l1.append(row.time_stamp)
-#         l2.append(row.cpu_util_percent)
-#         cpu_dict[row.machine_id] = [l1, l2]
-#
-# for key, value in cpu_dict.items():
-#     plt.plot(value[0], value[1], label=key)
-#
-# plt.savefig("machine_usage.png")
-# plt.show()
 
 #
 schema_container_meta = StructType([\
