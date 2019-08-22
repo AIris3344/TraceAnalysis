@@ -2,9 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pyspark.sql import SparkSession
 from pyspark.sql.types import *
-from matplotlib.ticker import FormatStrFormatter
-from scipy.stats import norm
-import seaborn as sns
 from matplotlib.ticker import ScalarFormatter
 import statsmodels.api as sm
 
