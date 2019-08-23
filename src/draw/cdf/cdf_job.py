@@ -19,7 +19,7 @@ duration = spark.read.parquet(local_path + "batch_task_staging/job_duration_parq
 
 # Reshape the list to 1-d array
 rows = duration.count()
-data = np.reshape(duration.select("duration").collect(), rows)
+data = np.reshape(duration.select("duration").collect(), -1)
 
 # Compute ecdf and values of x and y
 ecdf = sm.distributions.ECDF(data)
@@ -39,7 +39,7 @@ duration = spark.read.parquet(data_path + "batch_instance_staging/task_duration_
 
 # Reshape the list to 1-d array
 rows = duration.count()
-data = np.reshape(duration.select("duration").collect(), rows)
+data = np.reshape(duration.select("duration").collect(), -1)
 
 # Compute ecdf and values of x and y
 ecdf = sm.distributions.ECDF(data)
