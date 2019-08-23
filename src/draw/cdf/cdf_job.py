@@ -1,14 +1,5 @@
 # To add a new cell, type '#%%'
 # To add a new markdown cell, type '#%% [markdown]'
-#%% Change working directory from the workspace root to the ipynb file location. Turn this addition off with the DataScience.changeDirOnImportExport setting
-# ms-python.python added
-import os
-try:
-	os.chdir(os.path.join(os.getcwd(), 'src/draw/cpu_memory'))
-	print(os.getcwd())
-except:
-	pass
-
 #%%
 import matplotlib.pyplot as plt
 import numpy as np
@@ -22,7 +13,6 @@ local_path = os.environ['HOME'] + "/data/"
 
 spark = SparkSession.builder     .master("local[*]")     .appName("TraceAnalysis")     .config("spark.driver.memory", "8g")     .getOrCreate()
 
-
 #%%
 # Read batck_task parquet
 df_batch_task = spark    .read    .parquet(data_path + "batch_task_parquet")
@@ -35,7 +25,6 @@ df_batch_instance = spark    .read    .parquet(data_path + "batch_instance_parqu
 print("batch_instance:")
 df_batch_instance.show()
 df_batch_instance.createOrReplaceTempView("batch_instance")
-
 
 #%%
 ######################## Write staging results to HDFS ####################################
