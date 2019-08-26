@@ -62,29 +62,6 @@ plt.vlines(x_99, 0, 0.99, colors="g", linestyles="dashed", label="99% task")
 plt.text(x_99, 0.99, "", size=10, position=(x_99, 0.5), fontdict={"color": "g"})
 
 #%%
-"""
-# The data set is too big just split
-# data = np.loadtxt(data_path + "batch_instance_staging/ins_reduce_csv/ins.csv", dtype="uint32")
-# data = np.memmap(data_path + "batch_instance_staging/ins_csv/ins.csv", dtype=np.uint32)
-data = pd.Series([])
-# 1347372775
-chunkSize = 1000000
-reader = pd.read_csv(data_path + "batch_instance_staging/ins_csv/ins.csv", iterator=True, dtype=np.uint32)
-loop = True
-while loop:
-    try:
-        df = reader.get_chunk(chunkSize)
-        # print(df.head())
-        for i in np.arange(0, chunkSize, 100):
-            data = data.append(df.iloc[i : i + 100].mean())
-        data.to_csv(data_path + "batch_instance_staging/ins_csv/average.csv", mode="a+", index=False, header=False)
-        data = pd.Series([])
-    except StopIteration:
-        loop = False
-        print("Iteration is stopped.")
-
-"""
-#%%
 data = np.genfromtxt(data_path + "batch_instance_staging/ins_csv/average.csv")
 
 #%%

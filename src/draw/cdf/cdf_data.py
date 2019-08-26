@@ -1,5 +1,7 @@
 #%%
 import os
+import numpy as np
+import pandas as pd
 from pyspark.sql import SparkSession
 
 data_path = "hdfs://10.1.4.11:9000/user/hduser/"
@@ -40,6 +42,22 @@ job.coalesce(1).write.csv(write_path + "batch_task_staging/job_duration_csv")
 task = spark.read.parquet(write_path + "batch_task_staging/task_duration").filter("duration >= 0").orderBy("duration")
 task.coalesce(1).write.csv(write_path + "batch_task_staging/task_duration_csv")
 
-ins = spark.read.parquet(write_path + "batch_instance_staging/instance_duration").filter("duration >= 0").orderBy("duration").createOrReplaceTempView("ins_duration")
-ins = spark.sql("SELECT group_data, AVG(duration) AS duration FROM (SELECT duration, FLOOR(duration / 10) AS group_data FROM ins_duration) t GROUP BY group_data ORDER BY group_data")
-ins.select("duration").coalesce(1).write.csv(write_path + "batch_instance_staging/ins_reduce_csv")
+ins = spark.read.parquet(write_path + "batch_instance_staging/instance_duration").filter("duration >= 0").orderBy("duration")
+ins.coalesce(1).write.csv(write_path + "batch_instance_staging/ins_reduce_csv")
+
+# The data set is too big just split, 1347372775 lines
+data = pd.Series([])
+
+chunkSize = 1000000
+reader = pd.read_csv(write_path + "batch_instance_staging/ins_csv/ins.csv", iterator=True, dtype=np.uint32)
+loop = True
+while loop:
+    try:
+        df = reader.get_chunk(chunkSize)
+        for i in np.arange(0, chunkSize, 100):
+            data = data.append(df.iloc[i : i + 100].mean())
+        data.to_csv(data_path + "batch_instance_staging/ins_csv/average.csv", mode="a+", index=False, header=False)
+        data = pd.Series([])
+    except StopIteration:
+        loop = False
+        print("Iteration is stopped.")
