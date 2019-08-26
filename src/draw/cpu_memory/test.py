@@ -1,24 +1,23 @@
 import matplotlib.pylab as plt
 import numpy as np
 from matplotlib.ticker import ScalarFormatter
-import matplotlib.pyplot as plt
-import numpy as np
 from pyspark.sql import SparkSession
-from pyspark.sql.types import *
-from matplotlib.ticker import ScalarFormatter
 import statsmodels.api as sm
 
 
-
-import scipy
+import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-x = np.random.randn(10000) # generate samples from normal distribution (discrete data)
-norm_cdf = scipy.stats.norm.cdf(x) # calculate the cdf - also discrete
+# ax = plt.subplot(111)
+t1 = np.arange(0.0, 1.0, 0.01)
+plt.plot(t1, t1**1, label="n=%d"%(1,))
 
-# plot the cdf
-sns.lineplot(x=x, y=norm_cdf)
+
+t1 = np.arange(1.0, 2.0, 0.01)
+plt.plot(t1, t1**2, label="n=%d"%(2,))
+
+leg = plt.legend(loc='best', ncol=2, mode="expand", shadow=True, fancybox=True)
+
 plt.show()
 
 """
