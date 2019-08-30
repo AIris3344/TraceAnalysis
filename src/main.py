@@ -20,7 +20,7 @@ schema_machine_meta = StructType([\
     StructField("mem_size", LongType(), True),\
     StructField("status", StringType(), True),])
 
-df_machine_meta = spark.read.format("csv").option("header", "false").schema(schema_machine_meta).load(data_path + "machine_meta.csv")
+df_machine_meta = spark.read.csv(data_path + "machine_meta.csv", header=False, schema=schema_machine_meta)
 print("machine_meta:")
 df_machine_meta.show()
 
@@ -62,7 +62,7 @@ schema_container_meta = StructType([\
     StructField("cpu_request", LongType(), True),\
     StructField("cpu_limit", LongType(), True),\
     StructField("mem_size", DoubleType(), True)])
-df_container_meta = spark.read.format("csv").option("header", "false").schema(schema_container_meta).load(data_path + "container_meta.csv")
+df_container_meta = spark.read.csv(data_path + "container_meta.csv", header=False, schema=schema_container_meta)
 print("container_mata:")
 df_container_meta.show()
 
@@ -80,7 +80,7 @@ schema_container_usage = StructType([\
     StructField("net_in", DoubleType(), True), \
     StructField("net_out", DoubleType(), True),\
     StructField("disk_io_percent", DoubleType(), True)])
-df_container_usage = spark.read.format("csv").option("header", "false").schema(schema_container_usage).load(data_path + "container_usage*.csv")
+df_container_usage = spark.read.csv(data_path + "container_usage*.csv", header=False, schema=schema_container_usage)
 print("container_usage:")
 df_container_usage.show()
 
