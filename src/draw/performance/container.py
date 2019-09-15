@@ -13,7 +13,6 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 container_usage = spark.read.parquet(data_path + "container_usage_parquet")
-container_usage.show()
 container_usage.createOrReplaceTempView("container_usage")
 
 container_usage = spark.sql("SELECT machine_id, container_id, FLOOR(time_stamp / (60 * 60)) AS t_hour, FLOOR(time_stamp / (60 * 60 * 24)) AS t_day, mem_util_percent as mem, cpu_util_percent as cpu, mpki, cpi FROM container_usage")
@@ -21,7 +20,6 @@ container_usage.write.parquet(write_path + "container_usage/staging")
 
 #%%
 # Write colocated data
-
 container_usage = spark.read.parquet(write_path + "container_usage/staging")
 container_usage.show()
 container_usage = container_usage.groupBy("container_id", "t_hour").agg({"mpki": "avg", "cpi": "avg", "mem": "avg", "cpu": "avg"})
@@ -29,7 +27,8 @@ container_usage = container_usage.select("container_id", "t_hour", container_usa
 container_usage.write.parquet(write_path + "container_usage/performance_day")
 
 #%%
-container = spark.read.parquet(write_path + "container_usage/performance_day").orderBy("t_hour")
+container = spark.read.parquet(write_path + "container_usage/performance_day")
+
 container = container.groupBy("t_hour") \
     .agg({"mem": "avg", "cpu": "avg", "mpki": "avg", "cpi": "avg"}) \
     .orderBy("t_hour")
@@ -46,20 +45,20 @@ container.show()
 
 fig, ax = plt.subplots()
 
-x = np.reshape(container.select("t_hour").collect(), -1) - 1
+x = np.reshape(container.select("t_hour").collect(), -1)
 y = np.reshape(container.select("cpu").collect(), -1)
 
 ax.plot(x, y, label="CPU")
 
-x = np.reshape(container.select("t_hour").collect(), -1) - 1
+x = np.reshape(container.select("t_hour").collect(), -1)
 y = np.reshape(container.select("mem").collect(), -1)
 ax.plot(x, y, label="Memory")
 
 ax.set_ylabel("Utilization")
 ax.set_xlabel("Time(days)")
-ax.set_xlim(0, 8)
+ax.set_xlim(0, 9)
 ax.set_ylim(0, 100)
-ax.set_xticks(np.arange(0, 9, 1))
+ax.set_xticks(np.arange(0, 10, 1))
 ax.set_yticks(np.arange(0, 110, 10))
 ax.set_yticklabels(["{:.1f}%".format(y) for y in ax.get_yticks()])
 ax.legend(ncol=2, bbox_to_anchor=(0.3, 1), loc='lower left', fontsize='small')
@@ -70,7 +69,7 @@ plt.show()
 #%%
 ## Plot CPI
 fig, ax = plt.subplots()
-x = np.reshape(container.select("t_hour").collect(), -1) - 1
+x = np.reshape(container.select("t_hour").collect(), -1)
 y = np.reshape(container.select("cpi").collect(), -1)
 
 ax.plot(x, y, label="CPI")
@@ -84,8 +83,8 @@ plt.show()
 #%%
 ## Plot MPKI
 fig, ax = plt.subplots()
-x = np.reshape(container.select("t_hour").collect(), -1) - 1
-y = np.reshape(container.select("mpki").collect(), -1) / 1000
+x = np.reshape(container.select("t_hour").collect(), -1)
+y = np.reshape(container.select("mpki").collect(), -1)
 
 ax.plot(x, y, label="MPKI")
 
